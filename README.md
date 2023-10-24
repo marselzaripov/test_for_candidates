@@ -1,20 +1,40 @@
 Symfony test for candidate
 
-GET request for price calculating
+1. GET request for price calculating
 
 http://localhost:8000/api/v1/product/calculate
 
 json body:
 
 {
-"product_id": 1,
-"taxNumber": "DE123456789",
-"couponCode": "D15"
+    "product_id": 1,
+    "taxNumber": "DE123456789",
+    "couponCode": "D15"
 }
 
 json response:
 
 200 OK
 {
-"price": 1003.44
+    "price": 1003.44
+}
+
+2. GET request for price calculating
+
+http://localhost:8000/api/v1/product/purchase
+
+json body:
+
+{
+    "product_id": 1,
+    "taxNumber": "DE123456789",
+    "couponCode": "D15",
+    "paymentProcessor": "paypal"
+}
+
+json response:
+
+200 OK
+{
+    "message": "success"
 }
