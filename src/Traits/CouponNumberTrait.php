@@ -6,13 +6,13 @@ namespace App\Traits;
 use App\Entity\Coupon;
 use Doctrine\ORM\EntityManagerInterface;
 
-trait CouponTrait
+trait CouponNumberTrait
 {
-    public function calculateCoupon(EntityManagerInterface $entityManager, ?string $couponCode, float $productPrice): float
+    public function calculateCouponDiscount(EntityManagerInterface $em, ?string $couponCode, float $productPrice): float
     {
         if (!$couponCode) return $productPrice;
 
-        $coupon = $entityManager->getRepository(Coupon::class)->findOneBy([
+        $coupon = $em->getRepository(Coupon::class)->findOneBy([
             'code' => $couponCode
         ]);
 

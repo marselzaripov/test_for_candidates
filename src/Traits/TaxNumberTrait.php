@@ -5,16 +5,14 @@ namespace App\Traits;
 use App\Entity\Tax;
 use Doctrine\ORM\EntityManagerInterface;
 
-trait TaxTrait
+trait TaxNumberTrait
 {
-    public function calculatePriceTax(EntityManagerInterface $entityManager, string $taxNumber, float $productPrice): float
+    public function calculatePriceTax(EntityManagerInterface $em, string $taxNumber, float $productPrice): float
     {
         $taxFormat = $this->getTaxNumberFormat($taxNumber);
-
-        $tax = $entityManager->getRepository(Tax::class)->findOneBy([
+        $tax = $em->getRepository(Tax::class)->findOneBy([
             'format' => $taxFormat
         ]);
-
         return (!$tax) ? $productPrice : ($productPrice + ($productPrice*$tax->getPercent()/100));
     }
 

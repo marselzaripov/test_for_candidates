@@ -8,18 +8,22 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 use App\Validator as AcmeAssert;
 
-class CalculatePriceRequest extends BaseRequest
+class PurchaseRequest extends BaseRequest
 {
     #[Type('integer')]
     #[NotBlank()]
-    protected $id;
+    protected $product_id;
 
     #[Type('string')]
     #[NotBlank([])]
     #[AcmeAssert\TaxNumberFormat()]
-    protected $taxNumber;
+    protected $tax_number;
 
     #[Type('string')]
     #[NotBlank([])]
-    protected $couponCode;
+    protected $coupon_code;
+
+    #[Type('string')]
+    #[NotBlank([])]
+    protected $payment_processor;
 }
