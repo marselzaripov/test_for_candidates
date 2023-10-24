@@ -32,7 +32,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/api/v1/product/calculate', methods: ['POST'])]
+    #[Route('/api/v1/product/purchase', methods: ['POST'])]
     public function purchase(PurchaseRequest $request, EntityManagerInterface $entityManager, ProductService $service): Response
     {
         $request->validate();
@@ -46,7 +46,7 @@ class ProductController extends AbstractController
             ], 404);
         }
 
-        $ok = $service->purchase($product, $entityManager, $data['tax_number'], $data['payment_processor'], $data['coupon_code']);
+        $ok = $service->purchaseProduct($product, $entityManager, $data['tax_number'], $data['payment_processor'], $data['coupon_code']);
 
         if (!$ok) {
             return $this->json([
